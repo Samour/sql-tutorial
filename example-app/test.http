@@ -1,0 +1,34 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "email": "aaron@test.com",
+  "firstName": "Aaron2",
+  "lastName": "Test"
+}
+
+###
+
+DELETE http://localhost:8080/users/482f04e3-7704-4f1c-ba61-dac4525ffd5c
+
+###
+
+GET http://localhost:8080/users/1cc06673-402f-499d-8b86-7f218d1428b1/pollResponses
+
+###
+
+POST http://localhost:8080/polls
+Content-Type: application/json
+
+{
+  "title": "Test Poll",
+  "responses": [
+    "Response 1",
+    "Response 2",
+    "Response 3"
+  ]
+}
+
+###
+
+GET http://localhost:8080/polls/b1d76cb8-f71e-4791-832a-ebcfe2c610b8/responses/count
