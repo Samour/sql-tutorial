@@ -8,7 +8,7 @@ import { openCreatePollModalEvent } from '../../events/OpenCreatePollModalEvent'
 import { createPollAddOptionEvent } from '../../events/CreatePollAddOptionEvent';
 import { createPollRemoveOptionEvent } from '../../events/CreatePollRemoveOptionEvent';
 import { createPollOptionValueEvent } from '../../events/CreatePollOptionValueEvent';
-import { pollsService } from '../../services/PollsService';
+import { getManager } from '../../services/manager';
 import FlexRow from '../shared/FlexRow';
 import OptionEntry from './OptionEntry';
 import { createPollUpdateTitleEvent } from '../../events/CreatePollUpdateTitleEvent';
@@ -82,7 +82,7 @@ function CreatePollModal({
             <Button disabled={!maySubmit || submitInProgress}
               variant="contained"
               color="primary"
-              onClick={() => pollsService.submitCreatePoll()}>
+              onClick={() => getManager().getPollsService().submitCreatePoll()}>
               Create
             </Button>
           </ButtonGroup>

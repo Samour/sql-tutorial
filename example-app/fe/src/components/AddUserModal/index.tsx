@@ -5,7 +5,7 @@ import { Dialog, FormControl, InputLabel, Input, ButtonGroup, Button } from '@ma
 import { IState } from '../../models/state';
 import { openAddUserModalEvent } from '../../events/OpenAddUserModalEvent';
 import { updateAddUserFieldEvent } from '../../events/UpdateAddUserFieldEvent';
-import { usersService } from '../../services/UsersService';
+import { getManager } from '../../services/manager';
 import FlexRow from '../shared/FlexRow';
 
 interface ICState {
@@ -76,7 +76,7 @@ function AddUserModal({
             <Button variant="contained"
               color="primary"
               disabled={submitInProgress}
-              onClick={usersService.submitNewUser()}>
+              onClick={getManager().getUsersService().submitNewUser()}>
               Create
             </Button>
           </ButtonGroup>

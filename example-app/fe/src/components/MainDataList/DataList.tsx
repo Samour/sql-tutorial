@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { List, ListItem, CircularProgress } from '@material-ui/core';
 import { ListItemResponse } from '../../models/dtos';
 import { IState } from '../../models/state';
-import { mainViewService } from '../../services/MainViewService';
+import { getManager } from '../../services/manager';
 
 interface ICState {
   loading: boolean;
@@ -21,7 +21,7 @@ function DataList({ loading, items }: ICState): JSX.Element {
   }
 
   const itemElements = items.map(({ id, displayTitle }, i) => (
-    <ListItem key={id} button onClick={mainViewService.openItemDetail(i)}>{displayTitle}</ListItem>
+    <ListItem key={id} button onClick={getManager().getMainViewService().openItemDetail(i)}>{displayTitle}</ListItem>
   ));
 
   return (

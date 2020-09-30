@@ -1,27 +1,33 @@
 import React, { useEffect } from 'react';
-import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import SideDrawer from './components/SideDrawer';
 import MainView from './components/MainView';
-import { mainViewService } from './services/MainViewService';
-import { store } from './store';
+import { getManager } from './services/manager';
 import AddUserModal from './components/AddUserModal';
 import CreatePollModal from './components/CreatePollModal';
+import { IState, MainListContext } from './models/state';
 
-function App(): JSX.Element {
+interface ICState {
+  listContext: MainListContext;
+}
+
+const mapState = (state: IState): ICState => ({
+  listContext: state.mainList.context,
+});
+
+function App({ listContext }: ICState): JSX.Element {
   useEffect(() => {
-    mainViewService.navigateMenu(store.getState().mainList.context)();
+    getManager().getMainViewService().navigateMenu(listContext)();
   }, []);
 
   return (
-    <Provider store={store}>
-      <div className="app-container">
-        <SideDrawer />
-        <MainView />
-        <AddUserModal />
-        <CreatePollModal />
-      </div>
-    </Provider>
+    <div className="app-container">
+      <SideDrawer />
+      <MainView />
+      <AddUserModal />
+      <CreatePollModal />
+    </div>
   );
 }
 
-export default App;
+export default connect(mapState)(App);

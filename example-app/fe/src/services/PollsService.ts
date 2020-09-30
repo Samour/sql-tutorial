@@ -8,8 +8,7 @@ import { resetCreatePollModalEvent } from '../events/ResetCreatePollModalEvent';
 import { pollViewModeEvent } from '../events/PollViewModeEvent';
 import { setPollResponsesEvent } from '../events/SetPollResponsesEvent';
 import { setPollResultsEvent } from '../events/SetPollResultsEvent';
-import { store } from '../store';
-import { IApiService, apiService } from './ApiService';
+import { IApiService } from './ApiService';
 
 export interface IPollsService {
   openPollsList(): Promise<void>;
@@ -21,7 +20,7 @@ export interface IPollsService {
   deletePoll(pollId: string): Promise<void>;
 }
 
-class PollsService implements IPollsService {
+export class PollsService implements IPollsService {
 
   constructor(private readonly store: Store<IState>, private readonly apiService: IApiService) { }
 
@@ -63,5 +62,3 @@ class PollsService implements IPollsService {
     await this.openPollsList();
   }
 }
-
-export const pollsService = new PollsService(store, apiService);

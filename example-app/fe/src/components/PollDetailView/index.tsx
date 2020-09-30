@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Button, ButtonGroup } from '@material-ui/core';
 import { IState, PollViewMode } from '../../models/state';
 import { clearViewPollEvent } from '../../events/ClearViewPollEvent';
-import { pollsService } from '../../services/PollsService';
+import { getManager } from '../../services/manager';
 import FlexRow from '../shared/FlexRow';
 import FlexColumn from '../shared/FlexColumn';
 import PollResultTable from './PollResultTable';
@@ -51,11 +51,13 @@ function PollDetailsView({
   closeView,
 }: ICState & IActions): JSX.Element {
   useEffect(() => {
-    pollsService.viewPollResponses(pollId, viewMode);
+    getManager().getPollsService().viewPollResponses(pollId, viewMode);
   }, [pollId]);
 
   const tabButton = (mode: PollViewMode, text: string): JSX.Element => (
-    <Button variant={variant(mode)} color={color(mode)} onClick={() => pollsService.viewPollResponses(pollId, mode)}>
+    <Button variant={variant(mode)}
+      color={color(mode)}
+      onClick={() => getManager().getPollsService().viewPollResponses(pollId, mode)}>
       {text}
     </Button>
   );
@@ -80,7 +82,9 @@ function PollDetailsView({
               <Button variant="contained" color="primary" disabled={!voteEnabled} onClick={openVoteModal}>
                 Cast Vote
               </Button>
-              <Button variant="contained" className="button-danger" onClick={() => pollsService.deletePoll(pollId)}>
+              <Button variant="contained"
+                className="button-danger"
+                onClick={() => getManager().getPollsService().deletePoll(pollId)}>
                 Delete
               </Button>
             </FlexRow>

@@ -6,7 +6,7 @@ import { Done } from '@material-ui/icons';
 import { IState } from '../../models/state';
 import { clearManageUserEvent } from '../../events/ClearManageUserEvent';
 import { setActiveUserEvent } from '../../events/SetActiveUserEvent';
-import { usersService } from '../../services/UsersService';
+import { getManager } from '../../services/manager';
 import { UserPollEntry } from '../../models/dtos';
 import FlexRow from '../shared/FlexRow';
 import FlexColumn from '../shared/FlexColumn';
@@ -47,7 +47,7 @@ function ManageUserView({
   closeView
 }: ICState & IActions): JSX.Element {
   useEffect(() => {
-    usersService.loadPollResponses(userId);
+    getManager().getUsersService().loadPollResponses(userId);
   }, [userId]);
 
   const UserIcon = (): JSX.Element | null => {
@@ -71,7 +71,11 @@ function ManageUserView({
       <FlexColumn className="detail-controls">
         <FlexRow className="gutter-vertical" spaceBetween>
           <Button variant="contained" color="primary" onClick={assumeIdentity(userId)}>Assume identity</Button>
-          <Button className="button-danger" variant="contained" onClick={usersService.deleteUser(userId)}>Delete</Button>
+          <Button className="button-danger"
+            variant="contained"
+            onClick={getManager().getUsersService().deleteUser(userId)}>
+            Delete
+            </Button>
         </FlexRow>
         <FlexRow className="gutter-vertical" spaceEvenly>
           <Button variant="contained" onClick={closeView}>Back</Button>

@@ -5,8 +5,7 @@ import { setMainListContextEvent } from '../events/SetMainListContextEvent';
 import { setMainListDataEvent } from '../events/SetMainListDataEvent';
 import { addUserInProgressEvent } from '../events/AddUserInProgressEvent';
 import { resetAddUserModalEvent } from '../events/ResetAddUserModalEvent';
-import { store } from '../store';
-import { IApiService, apiService } from './ApiService';
+import { IApiService } from './ApiService';
 import { populateUserPollsEvent } from '../events/PopulateUserPollsEvent';
 
 export interface IUsersService {
@@ -19,7 +18,7 @@ export interface IUsersService {
   loadPollResponses(id: string): Promise<void>;
 }
 
-class UsersService implements IUsersService {
+export class UsersService implements IUsersService {
 
   constructor(private readonly store: Store<IState>, private readonly apiService: IApiService) { }
 
@@ -58,5 +57,3 @@ class UsersService implements IUsersService {
     this.store.dispatch(populateUserPollsEvent(polls));
   }
 }
-
-export const usersService: IUsersService = new UsersService(store, apiService);

@@ -35,7 +35,7 @@ export interface IApiService {
   castVote(pollId: string, details: CastVoteRequest): Promise<void>;
 }
 
-class ApiService implements IApiService {
+export class ApiService implements IApiService {
 
   private configPromise?: Promise<IConfig>;
 
@@ -115,5 +115,3 @@ class ApiService implements IApiService {
     });
   }
 }
-
-export const apiService: IApiService = new ApiService();

@@ -1,8 +1,7 @@
 import { Store } from 'redux';
 import { IState, MainListContext } from '../models/state';
-import { store } from '../store';
-import { IUsersService, usersService } from './UsersService';
-import { IPollsService, pollsService } from './PollsService';
+import { IUsersService } from './UsersService';
+import { IPollsService } from './PollsService';
 import { openAddUserModalEvent } from '../events/OpenAddUserModalEvent';
 import { openManageUserEvent } from '../events/OpenManageUserEvent';
 import { openCreatePollModalEvent } from '../events/OpenCreatePollModalEvent';
@@ -17,7 +16,7 @@ export interface IMainViewService {
   openItemDetail(index: number): () => void;
 }
 
-class MainViewService implements IMainViewService {
+export class MainViewService implements IMainViewService {
 
   constructor(private readonly store: Store<IState>, private readonly usersService: IUsersService,
     private readonly pollsService: IPollsService) { }
@@ -57,5 +56,3 @@ class MainViewService implements IMainViewService {
     };
   }
 }
-
-export const mainViewService: IMainViewService = new MainViewService(store, usersService, pollsService);
